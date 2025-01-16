@@ -1,6 +1,7 @@
 import { getPokemonInformation } from "./src/list-fetch-functions";
 import { renderPokemonList } from "./src/render-list-functions";
 import { renderOverview } from "./src/render-overview-functions";
+import { renderSearchList } from "./src/search-render-functions";
 
 const main = async () => {
   const pokemonUl = document.querySelector("#pokemon-list");
@@ -9,6 +10,7 @@ const main = async () => {
 
   renderPokemonList(pokemonUl, pokemons);
   renderOverview(overviewDiv, pokemons, 1);
+  renderSearchList();
 
   pokemonUl.addEventListener("click", (event) => {
     let pokemonId;
