@@ -15,19 +15,27 @@ const getTwentyPokemon = async () => {
 
 const getPokemonInformation = async () => {
   const pokemons = await getTwentyPokemon();
+  const format = (name) => {
+    const arr = name.split(" ");
+    for (let i = 0; i < arr.length; i += 1) {
+      arr[i] = arr[i][0].toUpperCase() + arr[i].substr(1);
+    }
+    return arr.join(" ");
+  };
+
   const information = [];
   for (let pokemon of pokemons.results) {
     const response = await fetch(pokemon.url);
     const data = await response.json();
-
     information.push({
-      name: data.name,
-      type: data.types[0].type.name,
+      name: format(data.name),
+      type: format(data.types[0].type.name),
       no: data.game_indices[0].game_index,
-      img: data.sprites.front_default,
+      img: data.sprites.other.home.front_default,
+      id: data.id,
     });
   }
   return information;
 };
 
-export { getPokemonInformation };
+export { getTwentyPokemon, getPokemonInformation };

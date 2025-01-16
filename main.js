@@ -4,19 +4,28 @@ import { renderOverview } from "./src/render-overview-functions";
 
 const main = async () => {
   const pokemonUl = document.querySelector("#pokemon-list");
-  const overviewDiv = document.querySelector("#overview");
+  const overviewDiv = document.querySelector("#overview-wrapper");
   const pokemons = await getPokemonInformation();
 
   renderPokemonList(pokemonUl, pokemons);
+  renderOverview(overviewDiv, pokemons, 1);
 
-  const obj = {
-    name: "pikachu",
-    type: "lightning",
-    no: 1,
-    img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-  };
+  pokemonUl.addEventListener("click", (event) => {
+    let pokemonId;
 
-  renderOverview(overviewDiv, obj);
+    if (event.target.nodeName === "LI") {
+      pokemonId = event.target.id;
+    } else if (event.target.nodeName === "IMG") {
+      pokemonId = event.target.parentNode.id;
+    } else if (event.target.nodeName === "P") {
+      pokemonId = event.target.parentNode.id;
+    }
+
+    if (Number(pokemonId)) {
+      overviewDiv.innerHTML = "";
+      renderOverview(overviewDiv, pokemons, Number(pokemonId));
+    }
+  });
 };
 
 main();
