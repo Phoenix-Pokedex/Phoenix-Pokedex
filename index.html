@@ -10,13 +10,30 @@
   </head>
   <body>
     <main>
-      <h1>Pokedex</h1>
+      <div id="header">
+        <h1>Pokedex</h1>
+        <div id="form-container">
+          <form>
+            <label for="search-box">Search Pokemon</label>
+            <input
+              id="search-box"
+              type="text"
+              placeholder="Search for a pokemon..."
+              name="search-input"
+            />
+            <input type="submit" value="Go!" />
+          </form>
+        </div>
+        <div class="results-container">
+          <ul class="results-list" id="list"></ul>
+        </div>
+      </div>
       <div id="content-wrapper">
-        <section id="overview-section">
+        <section aria-label="overview" id="overview-section">
           <h2>Overview</h2>
           <div id="overview-wrapper"></div>
         </section>
-        <section id="pokemons">
+        <section aria-label="pokemons" id="pokemons">
           <h2>Pokemons</h2>
           <ul id="pokemon-list"></ul>
         </section>
