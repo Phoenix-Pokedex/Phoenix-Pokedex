@@ -1,4 +1,12 @@
 export const fetchPokemon = async (pokemonId) => {
+  const format = (name) => {
+    const arr = name.split(" ");
+    for (let i = 0; i < arr.length; i += 1) {
+      arr[i] = arr[i][0].toUpperCase() + arr[i].substr(1);
+    }
+    return arr.join(" ");
+  };
+
   try {
     if (!pokemonId) {
       console.warn(`Provide a Pokemon name`);
@@ -21,7 +29,7 @@ export const fetchPokemon = async (pokemonId) => {
 
     // Structure the information
     const information = {
-      name: data.name,
+      name: format(data.name),
       img: data.sprites.other.home.front_default,
       height: data.height,
       weight: data.weight,

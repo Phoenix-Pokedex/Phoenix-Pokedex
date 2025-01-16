@@ -60,6 +60,7 @@ export const showPokemonDetails = () => {
 };
 
 export const hidePokemonDetails = () => {
-  const closeDialog = document.querySelector("#dialog-id");
-  closeDialog.close();
+  const dialog = document.querySelector("#dialog-id");
+  dialog.close();
+  dialog.remove();
 };
