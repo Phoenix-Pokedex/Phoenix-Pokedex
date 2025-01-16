@@ -1,13 +1,13 @@
-export const fetchPokemon = async (pokemonName) => {
+export const fetchPokemon = async (pokemonId) => {
   try {
-    if (!pokemonName) {
+    if (!pokemonId) {
       console.warn(`Provide a Pokemon name`);
       return null;
     }
 
     // Fetch data from the API
     const response = await fetch(
-      `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
+      `https://pokeapi.co/api/v2/pokemon/${pokemonId}`
     );
 
     // Check if the response is okay
@@ -22,7 +22,7 @@ export const fetchPokemon = async (pokemonName) => {
     // Structure the information
     const information = {
       name: data.name,
-      img: data.sprites.front_default,
+      img: data.sprites.other.home.front_default,
       height: data.height,
       weight: data.weight,
       abilities: data.abilities.map((ability) => ability.ability.name),

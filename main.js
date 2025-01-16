@@ -1,13 +1,22 @@
+import { fetchPokemon } from "./src/modal-fetch-functions";
 import {
-  fetchPokemon,
-  //   getPokemonInformation,
-} from "./src/modal-fetch-functions";
+  hidePokemonDetails,
+  renderOnePokemon,
+  showPokemonDetails,
+} from "./src/render-modal-functions";
 
 const main = async () => {
-  const pokemons = await fetchPokemon("bulbasaur");
-  console.log(pokemons);
+  // Creates modal programmatically
 
-  //   const pokemonInfo = await getPokemonInformation();
-  //   console.log(pokemonInfo);
+  const button = document.querySelector(".learn-more-button");
+  button.addEventListener("click", async (event) => {
+    const pokemonId = event.target.id;
+
+    console.log(pokemonId);
+    const pokemons = await fetchPokemon(pokemonId);
+    renderOnePokemon(pokemons);
+
+    showPokemonDetails();
+  });
 };
 main();
