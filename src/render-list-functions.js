@@ -1,5 +1,5 @@
 const renderPokemonList = (listUl, pokemonInformation) => {
-  pokemonInformation.forEach((pokemon) => {
+  pokemonInformation.pokemonList.forEach((pokemon) => {
     const li = document.createElement("li");
     li.className = "pokemon";
     li.setAttribute("id", pokemon.id);
@@ -8,7 +8,7 @@ const renderPokemonList = (listUl, pokemonInformation) => {
     const type = document.createElement("p");
     type.textContent = pokemon.type;
     const no = document.createElement("p");
-    no.textContent = `No. ${pokemon.no}`;
+    no.textContent = `No. ${pokemon.id}`;
     const img = document.createElement("img");
     img.src = pokemon.img;
     img.style.height = "80px";

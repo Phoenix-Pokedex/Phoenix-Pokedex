@@ -6,9 +6,9 @@ import {
   hidePokemonDetails,
 } from "./render-modal-functions";
 
-const renderOverview = async (overviewDiv, pokemonArr, pokemonId) => {
+const renderOverview = async (overviewDiv, object, pokemonId = 1) => {
   const data = {};
-  for (let pokemon of pokemonArr) {
+  for (let pokemon of object.pokemonList) {
     if (pokemon.id === pokemonId) {
       data.name = pokemon.name;
       data.img = pokemon.img;
@@ -31,7 +31,6 @@ const renderOverview = async (overviewDiv, pokemonArr, pokemonId) => {
 
   learnMore.addEventListener("click", async (event) => {
     const pokemonId = Number(event.target.getAttribute("pokemon-id"));
-    console.log(pokemonId);
     const pokemons = await fetchPokemon(pokemonId);
     renderOnePokemon(pokemons);
     showPokemonDetails();
