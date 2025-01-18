@@ -33,15 +33,15 @@ const getTwentyPokemon = async (
 };
 
 const getPokemonInformation = async (endpoint) => {
-  let pokemons = await getTwentyPokemon(endpoint);
+  let data = await getTwentyPokemon(endpoint);
 
   const information = {
-    nextPage: pokemons.next,
-    previousPage: pokemons.previous,
+    nextPage: data.next,
+    previousPage: data.previous,
     pokemonList: [],
   };
 
-  for (let pokemon of pokemons.results) {
+  for (let pokemon of data.results) {
     const response = await fetch(pokemon.url);
     const data = await response.json();
     information.pokemonList.push({
@@ -55,4 +55,26 @@ const getPokemonInformation = async (endpoint) => {
   return information;
 };
 
-export { getTwentyPokemon, getPokemonInformation, getAllPokemon };
+const getAllPokemonInformation = async (pokemonInformation) => {
+  const information = {
+    pokemonList: [],
+  };
+  for (let pokemon of pokemonInformation) {
+    const response = await fetch(pokemon.url);
+    const data = await response.json();
+    information.pokemonList.push({
+      name: data.name,
+      type: data.types[0].type.name,
+      img: data.sprites.other.home.front_default,
+      id: data.id,
+    });
+  }
+  return information;
+};
+
+export {
+  getTwentyPokemon,
+  getPokemonInformation,
+  getAllPokemon,
+  getAllPokemonInformation,
+};

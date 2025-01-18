@@ -1,6 +1,6 @@
 import { fetchPokemon } from "./modal-fetch-functions";
 import { renderOnePokemon, showPokemonDetails } from "./render-modal-functions";
-import { format } from "./helper-functions";
+import { format } from "./dom-helper-functions";
 
 const renderOverview = async (overviewDiv, object, pokemonId = 1) => {
   const data = {};

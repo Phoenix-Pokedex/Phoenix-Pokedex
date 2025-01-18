@@ -1,4 +1,4 @@
-import { format, noResults } from "./helper-functions";
+import { format, notFoundMessage } from "./dom-helper-functions";
 
 const renderPokemonList = (listUl, pokemonInformation) => {
   pokemonInformation.forEach((pokemon) => {
@@ -21,18 +21,8 @@ const renderPokemonList = (listUl, pokemonInformation) => {
   });
 
   if (pokemonInformation.length === 0) {
-    noResults();
+    notFoundMessage(listUl);
   }
 };
 
-const renderSearchMessage = (listUl) => {
-  const li = document.createElement("li");
-  const message = document.createTextNode(
-    "Keep Scrolling to Fetch and Find this Pokemon!"
-  );
-
-  li.append(message);
-  listUl.append(li);
-};
-
-export { renderPokemonList, renderSearchMessage };
+export { renderPokemonList };
