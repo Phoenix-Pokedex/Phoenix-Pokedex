@@ -1,12 +1,14 @@
+import { format, noResults } from "./helper-functions";
+
 const renderPokemonList = (listUl, pokemonInformation) => {
-  pokemonInformation.pokemonList.forEach((pokemon) => {
+  pokemonInformation.forEach((pokemon) => {
     const li = document.createElement("li");
     li.className = "pokemon";
     li.setAttribute("id", pokemon.id);
     const name = document.createElement("p");
-    name.textContent = pokemon.name;
+    name.textContent = format(pokemon.name);
     const type = document.createElement("p");
-    type.textContent = pokemon.type;
+    type.textContent = format(pokemon.type);
     const no = document.createElement("p");
     no.textContent = `No. ${pokemon.id}`;
     const img = document.createElement("img");
@@ -17,6 +19,20 @@ const renderPokemonList = (listUl, pokemonInformation) => {
     li.append(img, no, name, type);
     listUl.append(li);
   });
+
+  if (pokemonInformation.length === 0) {
+    noResults();
+  }
 };
 
-export { renderPokemonList };
+const renderSearchMessage = (listUl) => {
+  const li = document.createElement("li");
+  const message = document.createTextNode(
+    "Keep Scrolling to Fetch and Find this Pokemon!"
+  );
+
+  li.append(message);
+  listUl.append(li);
+};
+
+export { renderPokemonList, renderSearchMessage };

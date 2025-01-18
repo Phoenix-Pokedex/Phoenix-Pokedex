@@ -1,22 +1,25 @@
-import { getPokemonInformation } from "./src/list-fetch-functions";
-import { renderPokemonList } from "./src/render-list-functions";
+import {
+  getPokemonInformation,
+  getAllPokemon,
+} from "./src/list-fetch-functions";
+import {
+  renderPokemonList,
+  renderSearchMessage,
+} from "./src/render-list-functions";
 import { renderOverview } from "./src/render-overview-functions";
-import { renderSearchList } from "./src/search-render-functions";
 
 const main = async () => {
   const pokemonUl = document.querySelector("#pokemon-list");
   const overviewDiv = document.querySelector("#overview-wrapper");
+  const pokemons = await getPokemonInformation(); // Source of truth
 
-  // Source of truth
-  let pokemons = await getPokemonInformation();
-
-  renderPokemonList(pokemonUl, pokemons);
+  // Default renders
+  renderPokemonList(pokemonUl, pokemons.pokemonList);
   renderOverview(overviewDiv, pokemons, 1);
-  renderSearchList();
 
+  // Implementation of pokemon overview
   pokemonUl.addEventListener("click", (event) => {
     let pokemonId;
-
     if (event.target.nodeName === "LI") {
       pokemonId = event.target.id;
     } else if (event.target.nodeName === "IMG") {
@@ -24,27 +27,13 @@ const main = async () => {
     } else if (event.target.nodeName === "P") {
       pokemonId = event.target.parentNode.id;
     }
-
     if (Number(pokemonId)) {
       overviewDiv.innerHTML = "";
       renderOverview(overviewDiv, pokemons, Number(pokemonId));
     }
   });
 
-  // Test Button
-  const loadPokemonButton = document.getElementById("load-pokemon");
-
-  loadPokemonButton.addEventListener("click", async () => {
-    const incomingData = await getPokemonInformation(pokemons.nextPage);
-    pokemons.nextPage = incomingData.nextPage;
-    pokemons.previousPage = incomingData.previousPage;
-    pokemons.pokemonList = pokemons.pokemonList.concat(
-      incomingData.pokemonList
-    );
-    renderPokemonList(pokemonUl, incomingData);
-  });
-
-  // Implementation of list scroll update
+  // Implementation of list update on list scroll
   pokemonUl.addEventListener("scroll", async () => {
     const myScrollTop = pokemonUl.scrollTop;
     const myScrollHeight = pokemonUl.scrollHeight;
@@ -58,8 +47,40 @@ const main = async () => {
         pokemons.pokemonList = pokemons.pokemonList.concat(
           incomingData.pokemonList
         );
-        renderPokemonList(pokemonUl, incomingData);
+        // Add new pokemon to the list
+        renderPokemonList(pokemonUl, incomingData.pokemonList);
       });
+    }
+  });
+
+  // Implementation of search feature
+  const searchInput = document.querySelector("#search-box");
+  const allPokemonCache = await getAllPokemon();
+
+  searchInput.addEventListener("input", async (event) => {
+    let value = event.target.value;
+    if (value && value.trim().length > 0) {
+      pokemonUl.innerHTML = "";
+      value = value.trim().toLowerCase();
+
+      // Tries to look for what is already in the pokemons variable
+      let filteredResults = pokemons.pokemonList.filter((pokemon) => {
+        return pokemon.name.includes(value);
+      });
+
+      // Tries to look in the pokemon names cache
+      let pokemonNamesArr = allPokemonCache.results.filter((pokemon) => {
+        return pokemon.name.includes(value);
+      });
+
+      if (filteredResults.length === 0 && pokemonNamesArr.length > 0) {
+        renderSearchMessage(pokemonUl);
+      } else {
+        renderPokemonList(pokemonUl, filteredResults);
+      }
+    } else {
+      pokemonUl.innerHTML = "";
+      renderPokemonList(pokemonUl, pokemons.pokemonList);
     }
   });
 };

@@ -1,3 +1,20 @@
+const getAllPokemon = async () => {
+  try {
+    const response = await fetch(
+      "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=-1"
+    );
+    if (!response.ok) {
+      console.warn("Failed to get pokemon data");
+      return null;
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.warn(error.message);
+    return null;
+  }
+};
+
 const getTwentyPokemon = async (
   endpoint = "https://pokeapi.co/api/v2/pokemon"
 ) => {
@@ -18,14 +35,6 @@ const getTwentyPokemon = async (
 const getPokemonInformation = async (endpoint) => {
   let pokemons = await getTwentyPokemon(endpoint);
 
-  const format = (name) => {
-    const arr = name.split(" ");
-    for (let i = 0; i < arr.length; i += 1) {
-      arr[i] = arr[i][0].toUpperCase() + arr[i].substr(1);
-    }
-    return arr.join(" ");
-  };
-
   const information = {
     nextPage: pokemons.next,
     previousPage: pokemons.previous,
@@ -36,8 +45,8 @@ const getPokemonInformation = async (endpoint) => {
     const response = await fetch(pokemon.url);
     const data = await response.json();
     information.pokemonList.push({
-      name: format(data.name),
-      type: format(data.types[0].type.name),
+      name: data.name,
+      type: data.types[0].type.name,
       img: data.sprites.other.home.front_default,
       id: data.id,
     });
@@ -46,4 +55,4 @@ const getPokemonInformation = async (endpoint) => {
   return information;
 };
 
-export { getTwentyPokemon, getPokemonInformation };
+export { getTwentyPokemon, getPokemonInformation, getAllPokemon };

@@ -1,10 +1,6 @@
-import { getPokemonInformation } from "./list-fetch-functions";
 import { fetchPokemon } from "./modal-fetch-functions";
-import {
-  renderOnePokemon,
-  showPokemonDetails,
-  hidePokemonDetails,
-} from "./render-modal-functions";
+import { renderOnePokemon, showPokemonDetails } from "./render-modal-functions";
+import { format } from "./helper-functions";
 
 const renderOverview = async (overviewDiv, object, pokemonId = 1) => {
   const data = {};
@@ -17,13 +13,13 @@ const renderOverview = async (overviewDiv, object, pokemonId = 1) => {
   }
 
   const name = document.createElement("h2");
-  name.textContent = data.name;
+  name.textContent = `#${pokemonId} - ${format(data.name)} `;
   const img = document.createElement("img");
   img.src = data.img;
   img.style.height = "400px";
   img.style.width = "400px";
   const type = document.createElement("p");
-  type.textContent = data.type;
+  type.textContent = format(data.type);
   const learnMore = document.createElement("button");
   learnMore.textContent = "Learn More";
   learnMore.id = "learn-more-button";
