@@ -12,14 +12,26 @@ const renderOverview = async (overviewDiv, object, pokemonId = 1) => {
     }
   }
 
+  const detailsDiv = document.createElement("div");
+  detailsDiv.id = "overview-details-container";
+
   const name = document.createElement("h2");
   name.textContent = `#${pokemonId} - ${format(data.name)} `;
+  const imageWrapper = document.createElement("div");
+  imageWrapper.id = "overview-image-wrapper";
   const img = document.createElement("img");
+  img.id = "pokemon-image";
   img.src = data.img;
-  img.style.height = "400px";
-  img.style.width = "400px";
+
+  const typeContainer = document.createElement("div");
+  typeContainer.id = "type-container";
+
   const type = document.createElement("p");
   type.textContent = format(data.type);
+
+  const typeImg = document.createElement("img");
+  typeImg.src = `https://raw.githubusercontent.com/msikma/pokesprite/refs/heads/master/misc/types/gen8/${data.type}.png`;
+
   const learnMore = document.createElement("button");
   learnMore.textContent = "Learn More";
   learnMore.id = "learn-more-button";
@@ -32,7 +44,13 @@ const renderOverview = async (overviewDiv, object, pokemonId = 1) => {
     showPokemonDetails();
   });
 
-  overviewDiv.append(img, name, type, learnMore);
+  imageWrapper.append(img);
+
+  typeContainer.append(typeImg, type);
+
+  detailsDiv.append(name, typeContainer);
+
+  overviewDiv.append(detailsDiv, imageWrapper, learnMore);
 };
 
 export { renderOverview };

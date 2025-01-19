@@ -47,7 +47,10 @@ const getPokemonInformation = async (endpoint) => {
     information.pokemonList.push({
       name: data.name,
       type: data.types[0].type.name,
-      img: data.sprites.other.home.front_default,
+      img:
+        data.sprites.other.home.front_default === null
+          ? "https://static.pokemonpets.com/images/monsters-images-800-800/4228-Unown-Question.webp"
+          : data.sprites.other.home.front_default,
       id: data.id,
     });
   }
@@ -65,7 +68,10 @@ const getAllPokemonInformation = async (pokemonInformation) => {
     information.pokemonList.push({
       name: data.name,
       type: data.types[0].type.name,
-      img: data.sprites.other.home.front_default,
+      img:
+        data.sprites.other.home.front_default === null
+          ? "https://cdn-icons-png.flaticon.com/512/10414/10414732.png"
+          : data.sprites.other.home.front_default,
       id: data.id,
     });
   }

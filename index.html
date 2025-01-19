@@ -7,14 +7,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="module" src="./main.js"></script>
     <title>Pokedex</title>
+    <!-- Font -->
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Funnel+Display:wght@300..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Khand:wght@300;400;500;600;700&family=Lexend+Deca:wght@100..900&family=Lexend:wght@100..900&family=M+PLUS+1p:wght@900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Saira:ital,wdth,wght@0,78.5,100..900;1,78.5,100..900&family=Smooch+Sans:wght@100..900&display=swap");
+    </style>
   </head>
   <body>
     <main>
       <div id="header">
-        <h1>Pokedex</h1>
+        <div id="title-container">
+          <img
+            src="/assets/svg/icons/pokeball-header.svg"
+            alt="image of pokeball"
+            width="60px"
+          />
+          <h1>Pokedex</h1>
+          <img
+            src="/assets/svg/icons/pokeball-header.svg"
+            alt="image of pokeball"
+            width="60px"
+          />
+        </div>
+        <div class="stats-container"></div>
+        <div class="stats-container"></div>
+      </div>
+      <div id="tools-bar">
         <div id="form-container">
           <form>
-            <label for="search-box">Search Pokemon</label>
+            <label for="search-box">Explore</label>
             <input
               id="search-box"
               type="text"
@@ -25,12 +45,11 @@
         </div>
       </div>
       <div id="content-wrapper">
-        <section aria-label="overview" id="overview-section">
-          <h2>Overview</h2>
-          <div id="overview-wrapper"></div>
+        <section aria-label="overview" id="overview-wrapper">
+          <!-- <h2>Overview</h2> -->
         </section>
         <section aria-label="pokemons" id="pokemons">
-          <h2>Pokemons</h2>
+          <h2>Pokemon</h2>
           <ul id="pokemon-list"></ul>
         </section>
       </div>
