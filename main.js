@@ -3,7 +3,7 @@ import {
   getAllPokemon,
   getAllPokemonInformation,
 } from "./src/list-fetch-functions";
-import { renderPokemonList } from "./src/render-list-functions";
+import { renderPokemonList } from "./src/list-render-functions";
 import { longerMessageRequired } from "./src/dom-helper-functions";
 import { renderOverview } from "./src/render-overview-functions";
 import { search } from "./src/search-query-functions";
@@ -11,7 +11,11 @@ import { search } from "./src/search-query-functions";
 const main = async () => {
   const pokemonUl = document.querySelector("#pokemon-list");
   const overviewDiv = document.querySelector("#overview-wrapper");
-  const pokemons = await getPokemonInformation(); // Source of truth
+  const pokemons = await getPokemonInformation();
+
+  // Default renders
+  renderPokemonList(pokemonUl, pokemons.pokemonList);
+  renderOverview(overviewDiv, pokemons, 1);
 
   // Implementation of search feature
   const searchInput = document.querySelector("#search-box");
@@ -19,34 +23,31 @@ const main = async () => {
   let searchMode = true;
   let pokemonInformation;
 
-  // Default renders
-  renderPokemonList(pokemonUl, pokemons.pokemonList);
-  renderOverview(overviewDiv, pokemons, 1);
-
   searchInput.addEventListener("input", async (event) => {
-    let value = event.target.value;
+    pokemonUl.innerHTML = "";
     searchMode = false;
-    if (value && value.trim().length >= 3) {
-      pokemonUl.innerHTML = "";
-      value = value.trim().toLowerCase();
+    let value = event.target.value.trim().toLowerCase();
 
+    if (value.length === 0) {
+      searchMode = true;
+      renderPokemonList(pokemonUl, pokemons.pokemonList);
+    }
+
+    if (value && value.length < 3) {
+      longerMessageRequired(pokemonUl);
+    }
+
+    if (value && value.length >= 3) {
       // Searches for the pokemon name in the pokemon name cache
       let searchResults = search(allPokemonCache.results, value);
       pokemonInformation = await getAllPokemonInformation(searchResults);
-
       renderPokemonList(pokemonUl, pokemonInformation.pokemonList);
-    } else if (value && value.trim().length < 3) {
-      pokemonUl.innerHTML = "";
-      longerMessageRequired(pokemonUl);
-    } else if (value.trim().length === 0) {
-      pokemonUl.innerHTML = "";
-      searchMode = true;
-      renderPokemonList(pokemonUl, pokemons.pokemonList);
     }
   });
 
   // Implementation of pokemon overview
   pokemonUl.addEventListener("click", (event) => {
+    overviewDiv.innerHTML = "";
     let pokemonId;
     if (event.target.nodeName === "LI") {
       pokemonId = event.target.id;
@@ -56,27 +57,23 @@ const main = async () => {
       pokemonId = event.target.parentNode.id;
     }
 
-    if (
-      Number(pokemonId) &&
-      Number(pokemonId) > pokemons.pokemonList.slice(-1)[0].id
-    ) {
-      overviewDiv.innerHTML = "";
+    // If the id of the pokemon to render is not render already get the information from the other source of pokemon information
+    if (Number(pokemonId) > pokemons.pokemonList.slice(-1)[0].id) {
       renderOverview(overviewDiv, pokemonInformation, Number(pokemonId));
-    } else if (Number(pokemonId)) {
-      overviewDiv.innerHTML = "";
+    } else {
       renderOverview(overviewDiv, pokemons, Number(pokemonId));
     }
   });
 
-  // Implementation of list update on list scroll
+  // Implementation of fetch update on list scroll
   pokemonUl.addEventListener("scroll", async () => {
     if (searchMode) {
-      const myScrollTop = pokemonUl.scrollTop;
+      const myScrollTop = Math.ceil(pokemonUl.scrollTop);
       const myScrollHeight = pokemonUl.scrollHeight;
       const height = pokemonUl.clientHeight;
       const diff = myScrollHeight - myScrollTop;
 
-      if (diff === height && pokemons.nextPage !== null) {
+      if (diff <= height && pokemons.nextPage !== null) {
         getPokemonInformation(pokemons.nextPage).then((incomingData) => {
           pokemons.nextPage = incomingData.nextPage;
           pokemons.previousPage = incomingData.previousPage;

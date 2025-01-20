@@ -32,8 +32,8 @@ const renderOverview = async (overviewDiv, object, pokemonId = 1) => {
   const typeImg = document.createElement("img");
   typeImg.src = `https://raw.githubusercontent.com/msikma/pokesprite/refs/heads/master/misc/types/gen8/${data.type}.png`;
 
-  const learnMore = document.createElement("button");
-  learnMore.textContent = "Learn More";
+  const learnMore = document.createElement("img");
+  learnMore.src = "assets/svg/icons/info.png";
   learnMore.id = "learn-more-button";
   learnMore.setAttribute("pokemon-id", pokemonId);
 
@@ -44,13 +44,13 @@ const renderOverview = async (overviewDiv, object, pokemonId = 1) => {
     showPokemonDetails();
   });
 
-  imageWrapper.append(img);
+  imageWrapper.append(img, learnMore);
 
   typeContainer.append(typeImg, type);
 
   detailsDiv.append(name, typeContainer);
 
-  overviewDiv.append(detailsDiv, imageWrapper, learnMore);
+  overviewDiv.append(detailsDiv, imageWrapper);
 };
 
 export { renderOverview };

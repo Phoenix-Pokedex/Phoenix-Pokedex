@@ -16,7 +16,7 @@ const renderPokemonList = (listUl, pokemonInformation) => {
     img.style.height = "80px";
     img.style.width = "80px";
 
-    li.append(img, no, name, type);
+    li.append(img, no, name);
     listUl.append(li);
   });
 

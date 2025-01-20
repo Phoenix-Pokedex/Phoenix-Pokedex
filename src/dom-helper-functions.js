@@ -1,5 +1,6 @@
 const format = (name) => {
   const arr = name.split(" ");
+
   for (let i = 0; i < arr.length; i += 1) {
     arr[i] = arr[i][0].toUpperCase() + arr[i].substr(1);
   }
