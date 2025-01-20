@@ -47,7 +47,6 @@ const main = async () => {
 
   // Implementation of pokemon overview
   pokemonUl.addEventListener("click", (event) => {
-    overviewDiv.innerHTML = "";
     let pokemonId;
     if (event.target.nodeName === "LI") {
       pokemonId = event.target.id;
@@ -59,8 +58,10 @@ const main = async () => {
 
     // If the id of the pokemon to render is not render already get the information from the other source of pokemon information
     if (Number(pokemonId) > pokemons.pokemonList.slice(-1)[0].id) {
+      overviewDiv.innerHTML = "";
       renderOverview(overviewDiv, pokemonInformation, Number(pokemonId));
-    } else {
+    } else if (Number(pokemonId)) {
+      overviewDiv.innerHTML = "";
       renderOverview(overviewDiv, pokemons, Number(pokemonId));
     }
   });

@@ -213,6 +213,15 @@ html {
   height: 100%;
 }
 
+#pokemon-list {
+  list-style: none;
+  font-family: "Khand", serif;
+  font-size: large;
+  font-weight: 400;
+  color: black;
+  text-align: center;
+}
+
 /* Pokemon list title (Pokemon) */
 #pokemons h2 {
   font-family: "Khand", serif;
