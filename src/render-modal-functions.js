@@ -16,12 +16,6 @@ export const renderOnePokemon = (data) => {
   // adds an event listener to the close-button when we open the dialog
   closeButton.addEventListener("click", hidePokemonDetails);
 
-  // creates <h2> element that will store pokemon name
-  const pokemonItem = document.createElement("h2");
-  pokemonItem.id = "pokemon-name";
-  pokemonItem.textContent = `${data.name}`;
-  div.appendChild(pokemonItem);
-
   // creates the <img> tag
   const img = document.createElement("img");
   img.id = "single-pokemon-image";
@@ -30,21 +24,49 @@ export const renderOnePokemon = (data) => {
   img.alt = `An image of the ${data.name} Pokemon`;
   div.appendChild(img);
 
+  // creates <h2> element that will store pokemon name
+  const pokemonItem = document.createElement("h2");
+  pokemonItem.id = "pokemon-name";
+  pokemonItem.textContent = `${data.name}`;
+  div.appendChild(pokemonItem);
+
   // creates the <li> tag that will hold <ul> of the Pokemon stats
-  const pokemonListStats = document.createElement("li");
+  const pokemonListStats = document.createElement("ul");
+  pokemonListStats.id = "pokemon-stats";
+
+  // function that converts decimeters to inches
+  const decimetersToInches = (dm) => {
+    const inchesPerDecimeter = 3.937;
+    return dm * inchesPerDecimeter;
+  };
 
   // creates <ul> for pokemon height
-  const pokemonHeight = document.createElement("ul");
-  pokemonHeight.textContent = `Height: ${data.height} in`;
+  const pokemonHeight = document.createElement("li");
+  pokemonHeight.id = "pokemon-height";
+  const dm = data.height;
+  const inches = decimetersToInches(dm);
+  const roundedInches = Math.round(inches);
+  pokemonHeight.textContent = `Height: ${roundedInches} in`;
   pokemonListStats.appendChild(pokemonHeight);
 
+  // function that converts hectograms to pounds
+  const hectogramsToPounds = (hg) => {
+    const poundsPerHectogram = 0.2204622622;
+    return hg * poundsPerHectogram;
+  };
+
   // creates <ul> for pokemon weight
-  const pokemonWeight = document.createElement("ul");
-  pokemonWeight.textContent = `Weight: ${data.weight} lb`;
+  const pokemonWeight = document.createElement("li");
+  pokemonWeight.id = "pokemon-weight";
+  const hg = data.weight;
+  const pounds = hectogramsToPounds(hg);
+  const roundedPounds = Math.round(pounds);
+  pokemonWeight.textContent = `Weight: ${roundedPounds} lb`;
   pokemonListStats.appendChild(pokemonWeight);
 
   // creates <ul> for pokemon abilities
-  const pokemonAbilities = document.createElement("ul");
+  const pokemonAbilities = document.createElement("li");
+  pokemonAbilities.id = "pokemon-abilities";
   pokemonAbilities.textContent = `Abilities:${data.abilities.map(
     (ability) => ` ${ability}`
   )}`;
