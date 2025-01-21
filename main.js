@@ -1,7 +1,7 @@
 import {
-  getPokemonInformation,
-  getAllPokemon,
-  getAllPokemonInformation,
+  getTwentyPokemon,
+  getPokemon,
+  getData,
 } from "./src/list-fetch-functions";
 import { renderPokemonList } from "./src/list-render-functions";
 import { longerMessageRequired } from "./src/dom-helper-functions";
@@ -11,7 +11,7 @@ import { search } from "./src/search-query-functions";
 const main = async () => {
   const pokemonUl = document.querySelector("#pokemon-list");
   const overviewDiv = document.querySelector("#overview-wrapper");
-  const pokemons = await getPokemonInformation();
+  const pokemons = await getTwentyPokemon();
 
   // Default renders
   renderPokemonList(pokemonUl, pokemons.pokemonList);
@@ -19,7 +19,10 @@ const main = async () => {
 
   // Implementation of search feature
   const searchInput = document.querySelector("#search-box");
-  const allPokemonCache = await getAllPokemon();
+  const allPokemonCache = await getData(
+    "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=-1"
+  );
+
   let searchMode = true;
   let pokemonInformation;
 
@@ -39,8 +42,8 @@ const main = async () => {
 
     if (value && value.length >= 3) {
       // Searches for the pokemon name in the pokemon name cache
-      let searchResults = search(allPokemonCache.results, value);
-      pokemonInformation = await getAllPokemonInformation(searchResults);
+      let searchResults = search(allPokemonCache, value);
+      pokemonInformation = await getPokemon(searchResults);
       renderPokemonList(pokemonUl, pokemonInformation.pokemonList);
     }
   });
@@ -75,7 +78,7 @@ const main = async () => {
       const diff = myScrollHeight - myScrollTop;
 
       if (diff <= height && pokemons.nextPage !== null) {
-        getPokemonInformation(pokemons.nextPage).then((incomingData) => {
+        getTwentyPokemon(pokemons.nextPage).then((incomingData) => {
           pokemons.nextPage = incomingData.nextPage;
           pokemons.previousPage = incomingData.previousPage;
           pokemons.pokemonList = pokemons.pokemonList.concat(
