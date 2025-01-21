@@ -34,7 +34,7 @@ export const fetchPokemon = async (pokemonId) => {
       height: data.height,
       weight: data.weight,
       abilities: data.abilities.map((ability) => ability.ability.name),
-      cries: data.cries.legacy,
+      cries: data.cries.latest,
     };
     return information;
   } catch (error) {

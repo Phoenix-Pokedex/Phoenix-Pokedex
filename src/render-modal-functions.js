@@ -25,7 +25,7 @@ export const renderOnePokemon = (data) => {
   // creates the <img> tag
   const img = document.createElement("img");
   img.id = "single-pokemon-image";
-  img.src = data.img;
+  img.src = data.img === null ? "assets/svg/icons/image-break.png" : data.img;
   // img.style.height = "200px";
   img.alt = `An image of the ${data.name} Pokemon`;
   div.appendChild(img);
