@@ -7,105 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="module" src="./main.js"></script>
     <title>Pokedex</title>
-    <!-- Font -->
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Funnel+Display:wght@300..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Khand:wght@300;400;500;600;700&family=Lexend+Deca:wght@100..900&family=Lexend:wght@100..900&family=M+PLUS+1p:wght@900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Saira:ital,wdth,wght@0,78.5,100..900;1,78.5,100..900&family=Smooch+Sans:wght@100..900&display=swap");
-    </style>
   </head>
   <body>
     <main>
-      <div id="header">
-        <div id="title-container">
-          <img
-            src="/assets/svg/icons/pokeball-header.svg"
-            alt="image of pokeball"
-            width="60px"
-          />
-          <h1>Pokedex</h1>
-          <img
-            src="/assets/svg/icons/pokeball-header.svg"
-            alt="image of pokeball"
-            width="60px"
-          />
-        </div>
-        <div class="stats-container"></div>
-        <div class="stats-container"></div>
-      </div>
-      <div id="tools-bar">
-        <div id="form-container">
-          <form>
-            <label for="search-box">Explore</label>
-            <input
-              id="search-box"
-              type="text"
-              placeholder="Search for a pokemon..."
-              name="search-input"
-            />
-          </form>
-        </div>
-      </div>
-
-      <div id="content-wrapper">
-        <section aria-label="overview" id="overview-wrapper">
-          <!-- <h2>Overview</h2> -->
-        </section>
-        <section aria-label="pokemons" id="pokemons">
-          <h2>Pokemon</h2>
-          <ul id="pokemon-list"></ul>
-          <div id="loading-overlay">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-              <radialGradient
-                id="a11"
-                cx=".66"
-                fx=".66"
-                cy=".3125"
-                fy=".3125"
-                gradientTransform="scale(1.5)"
-              >
-                <stop offset="0" stop-color="#FFFFFF"></stop>
-                <stop offset=".3" stop-color="#FFFFFF" stop-opacity=".9"></stop>
-                <stop offset=".6" stop-color="#FFFFFF" stop-opacity=".6"></stop>
-                <stop offset=".8" stop-color="#FFFFFF" stop-opacity=".3"></stop>
-                <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"></stop>
-              </radialGradient>
-              <circle
-                transform-origin="center"
-                fill="none"
-                stroke="url(#a11)"
-                stroke-width="3"
-                stroke-linecap="round"
-                stroke-dasharray="200 1000"
-                stroke-dashoffset="0"
-                cx="100"
-                cy="100"
-                r="70"
-              >
-                <animateTransform
-                  type="rotate"
-                  attributeName="transform"
-                  calcMode="spline"
-                  dur="2"
-                  values="360;0"
-                  keyTimes="0;1"
-                  keySplines="0 0 1 1"
-                  repeatCount="indefinite"
-                ></animateTransform>
-              </circle>
-              <circle
-                transform-origin="center"
-                fill="none"
-                opacity=".2"
-                stroke="#FFFFFF"
-                stroke-width="3"
-                stroke-linecap="round"
-                cx="100"
-                cy="100"
-                r="70"
-              ></circle>
-            </svg>
-          </div>
-        </section>
-      </div>
+      <dialog id="guess-pokemon-modal">
+        <h2>Hello</h2>
+        <div id="win-status"></div>
+        <ul id="options-list"></ul>
+        <button type="button" id="dialog-close-button">Open Dialog</button>
+      </dialog>
+      <div id="guess-pokemon-background"></div>
+      <button type="button" id="dialog-open-button">Open Dialog</button>
     </main>
   </body>
 </html>
