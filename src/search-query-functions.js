@@ -1,7 +1,9 @@
 const search = (cache, query) => {
-  return cache.filter((pokemon) => {
-    return pokemon.name.includes(query);
-  });
+  return {
+    results: cache.results.filter((pokemon) => {
+      return pokemon.name.includes(query);
+    }),
+  };
 };
 
 export { search };

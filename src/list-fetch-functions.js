@@ -1,10 +1,10 @@
-const getAllPokemon = async () => {
+import { showSpinner, hideSpinner } from "./spinner-render-functions";
+
+const getData = async (url) => {
   try {
-    const response = await fetch(
-      "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=-1"
-    );
+    const response = await fetch(url);
     if (!response.ok) {
-      console.warn("Failed to get pokemon data");
+      console.warn(`Failed to fetch data from ${url}`);
       return null;
     }
     const data = await response.json();
@@ -13,74 +13,48 @@ const getAllPokemon = async () => {
     console.warn(error.message);
     return null;
   }
+};
+
+const getPokemon = async (pokemonData) => {
+  showSpinner();
+  const information = {
+    nextPage: pokemonData.next,
+    previousPage: pokemonData.previous,
+    pokemonList: [],
+  };
+
+  const promises = [];
+  for (let pokemon of pokemonData.results) {
+    promises.push(getData(pokemon.url));
+  }
+
+  return Promise.all(promises).then((data) => {
+    for (let i = 0; i < data.length; i += 1) {
+      information.pokemonList.push({
+        name: data[i].name,
+        type: data[i].types[0].type.name,
+        img:
+          data[i].sprites.other.home.front_default === null
+            ? "assets/svg/icons/image-break.png"
+            : data[i].sprites.other.home.front_default,
+        id: data[i].id,
+      });
+    }
+    hideSpinner();
+    return information;
+  });
 };
 
 const getTwentyPokemon = async (
   endpoint = "https://pokeapi.co/api/v2/pokemon"
 ) => {
-  try {
-    const response = await fetch(endpoint);
-    if (!response.ok) {
-      console.warn("Failed to get pokemon data");
-      return null;
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.warn(error.message);
-    return null;
-  }
-};
-
-const getPokemonInformation = async (endpoint) => {
-  let data = await getTwentyPokemon(endpoint);
-
-  const information = {
-    nextPage: data.next,
-    previousPage: data.previous,
-    pokemonList: [],
-  };
-
-  for (let pokemon of data.results) {
-    const response = await fetch(pokemon.url);
-    const data = await response.json();
-    information.pokemonList.push({
-      name: data.name,
-      type: data.types[0].type.name,
-      img:
-        data.sprites.other.home.front_default === null
-          ? "https://static.pokemonpets.com/images/monsters-images-800-800/4228-Unown-Question.webp"
-          : data.sprites.other.home.front_default,
-      id: data.id,
+  showSpinner();
+  return getData(endpoint).then(async (pokemonData) => {
+    return getPokemon(pokemonData).then((data) => {
+      hideSpinner();
+      return data;
     });
-  }
-
-  return information;
+  });
 };
 
-const getAllPokemonInformation = async (pokemonInformation) => {
-  const information = {
-    pokemonList: [],
-  };
-  for (let pokemon of pokemonInformation) {
-    const response = await fetch(pokemon.url);
-    const data = await response.json();
-    information.pokemonList.push({
-      name: data.name,
-      type: data.types[0].type.name,
-      img:
-        data.sprites.other.home.front_default === null
-          ? "https://cdn-icons-png.flaticon.com/512/10414/10414732.png"
-          : data.sprites.other.home.front_default,
-      id: data.id,
-    });
-  }
-  return information;
-};
-
-export {
-  getTwentyPokemon,
-  getPokemonInformation,
-  getAllPokemon,
-  getAllPokemonInformation,
-};
+export { getTwentyPokemon, getPokemon, getData };
