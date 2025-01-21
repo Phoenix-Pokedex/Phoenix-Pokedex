@@ -5,6 +5,7 @@ export const renderOnePokemon = (data) => {
 
   // creates <div> for a single fetched Pokemon
   const div = document.createElement("div");
+  div.id = "single-pokemon";
 
   //   creates <button> for closing the pop-up
   const closeButton = document.createElement("button");
@@ -17,13 +18,15 @@ export const renderOnePokemon = (data) => {
 
   // creates <h2> element that will store pokemon name
   const pokemonItem = document.createElement("h2");
+  pokemonItem.id = "pokemon-name";
   pokemonItem.textContent = `${data.name}`;
   div.appendChild(pokemonItem);
 
   // creates the <img> tag
   const img = document.createElement("img");
+  img.id = "single-pokemon-image";
   img.src = data.img;
-  img.style.height = "200px";
+  // img.style.height = "200px";
   img.alt = `An image of the ${data.name} Pokemon`;
   div.appendChild(img);
 
@@ -32,12 +35,12 @@ export const renderOnePokemon = (data) => {
 
   // creates <ul> for pokemon height
   const pokemonHeight = document.createElement("ul");
-  pokemonHeight.textContent = `Height: ${data.height}`;
+  pokemonHeight.textContent = `Height: ${data.height} in`;
   pokemonListStats.appendChild(pokemonHeight);
 
   // creates <ul> for pokemon weight
   const pokemonWeight = document.createElement("ul");
-  pokemonWeight.textContent = `Weight: ${data.weight}`;
+  pokemonWeight.textContent = `Weight: ${data.weight} lb`;
   pokemonListStats.appendChild(pokemonWeight);
 
   // creates <ul> for pokemon abilities
@@ -47,8 +50,19 @@ export const renderOnePokemon = (data) => {
   )}`;
   pokemonListStats.appendChild(pokemonAbilities);
 
-  // appends div to pokemonItem
+  // appends pokemonListStats to the div
   div.appendChild(pokemonListStats);
+
+  // creates <audio> for pokemon cries
+  const pokemonAudio = document.createElement("audio");
+  pokemonAudio.id = "audio-play-button";
+  pokemonAudio.src = data.cries;
+  pokemonAudio.controls = true;
+
+  const handlePlay = () => {};
+
+  pokemonAudio.addEventListener("play", handlePlay);
+  div.appendChild(pokemonAudio);
 
   dialog.appendChild(div);
   document.body.appendChild(dialog);
