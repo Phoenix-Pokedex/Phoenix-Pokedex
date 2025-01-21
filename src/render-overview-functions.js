@@ -30,7 +30,7 @@ const renderOverview = async (overviewDiv, object, pokemonId = 1) => {
   type.textContent = format(data.type);
 
   const typeImg = document.createElement("img");
-  typeImg.src = `https://raw.githubusercontent.com/msikma/pokesprite/refs/heads/master/misc/types/gen8/${data.type}.png`;
+  typeImg.src = `assets/types/${data.type}.png`;
 
   const learnMore = document.createElement("img");
   learnMore.src = "assets/svg/icons/info.png";
