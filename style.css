@@ -10,6 +10,13 @@ html {
   background-image: linear-gradient(#7b9edd, #495cab 30% 80%, #7b9edd);
 }
 
+/* --- Search Container --- */
+#search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /* --- Header Section --- */
 
 /* Pokedex Title */
@@ -67,10 +74,11 @@ html {
 
 /* XXX Header bar styling ends here XXX */
 
-/* --- Explore Section --- */
-
 /* Div container for form */
 #form-container {
+  display: flex;
+  justify-content: center;
+  gap: 10%;
   background-color: #71a4f3;
   border-bottom-style: solid;
   border-width: 5px;

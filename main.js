@@ -8,6 +8,7 @@ import { longerMessageRequired } from "./src/dom-helper-functions";
 import { renderOverview } from "./src/render-overview-functions";
 import { search } from "./src/search-query-functions";
 import { renderGame } from "./src/game-render-functions";
+import { filterByType } from "./src/filter";
 
 const main = async () => {
   const pokemonUl = document.querySelector("#pokemon-list");
@@ -106,6 +107,36 @@ const main = async () => {
   closeDialogButton.addEventListener("click", () => {
     gameDialog.close();
   });
+
+  //Filter implementation
+  const form = document.querySelector("#pokemon-type-form");
+  const pokemonListElement = document.querySelector("#pokemon-list");
+  const pokemonList = await getData(
+    "https://pokeapi.co/api/v2/pokemon?offset=0&limit=-1"
+  );
+  const pokemonData = await getPokemon(pokemonList);
+  const clearFilterButton = document.getElementById("clear-form-button");
+
+  clearFilterButton.addEventListener("click", () => {
+    searchMode = true;
+    pokemonUl.innerHTML = "";
+    renderPokemonList(pokemonUl, pokemons.pokemonList);
+    form.reset();
+  });
+
+  const handleSubmit = (event) => {
+    searchMode = false;
+    pokemonListElement.innerHTML = "";
+    event.preventDefault();
+    const data = new FormData(event.target);
+    const dataObject = Object.fromEntries(data.entries());
+    const pokemonTypeKey = dataObject["pokemon-type"];
+    const filteredData = filterByType(pokemonData.pokemonList, pokemonTypeKey);
+    renderPokemonList(pokemonListElement, filteredData);
+    form.reset();
+  };
+
+  form.addEventListener("submit", handleSubmit);
 };
 
 main();
