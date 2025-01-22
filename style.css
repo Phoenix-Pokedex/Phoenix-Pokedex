@@ -52,11 +52,17 @@ html {
 }
 
 /* Stats containers in header (for potential future use) */
-.stats-container {
+.minigame-button {
   background-color: #363636;
   width: 250px;
   height: 60px;
   border-radius: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Khand", serif;
+  color: white;
+  cursor: pointer;
 }
 
 /* XXX Header bar styling ends here XXX */
@@ -252,6 +258,7 @@ html {
   width: 100%;
   border-top-left-radius: 60px;
   border-bottom-left-radius: 60px;
+  cursor: pointer;
 }
 
 /* Pokemon list item text */
