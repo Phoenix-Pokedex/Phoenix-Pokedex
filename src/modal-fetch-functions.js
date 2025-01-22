@@ -36,6 +36,7 @@ export const fetchPokemon = async (pokemonId) => {
       abilities: data.abilities.map((ability) => ability.ability.name),
       cries: data.cries.latest,
     };
+
     return information;
   } catch (error) {
     console.error(error.message);
