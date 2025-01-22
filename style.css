@@ -146,6 +146,7 @@ html {
   position: absolute;
   right: 4px;
   top: 4px;
+  cursor: pointer;
 }
 
 /* Formatting for text within overview details */
@@ -466,19 +467,22 @@ html {
   list-style: none;
 }
 
-#audio-play-button {
+#cry-button {
   width: 300px;
-  background-color: #f1f1f1;
-  border-radius: 8px;
+  background-color: #f0f903;
+  border-radius: 25px;
   border: 2px solid orange;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 5px;
   margin: 10px 0;
-  transition: all 0.3s ease;
   overflow: auto;
+  font-family: "Khand", serif;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-#audio-play-button:hover {
+#cry-button {
   border-color: #007bff;
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
 }

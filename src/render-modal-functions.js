@@ -79,12 +79,18 @@ export const renderOnePokemon = (data) => {
   const pokemonAudio = document.createElement("audio");
   pokemonAudio.id = "audio-play-button";
   pokemonAudio.src = data.cries;
-  pokemonAudio.controls = true;
 
-  const handlePlay = () => {};
+  // creates the button element to click and play the audio
+  const pokemonCryButton = document.createElement("button");
+  pokemonCryButton.id = "cry-button";
+  pokemonCryButton.textContent = "Play Cry!";
 
-  pokemonAudio.addEventListener("play", handlePlay);
+  pokemonCryButton.addEventListener("click", () => {
+    pokemonAudio.play();
+  });
+
   div.appendChild(pokemonAudio);
+  div.appendChild(pokemonCryButton);
 
   dialog.appendChild(div);
   document.body.appendChild(dialog);
