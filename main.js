@@ -7,6 +7,7 @@ import { renderPokemonList } from "./src/list-render-functions";
 import { longerMessageRequired } from "./src/dom-helper-functions";
 import { renderOverview } from "./src/render-overview-functions";
 import { search } from "./src/search-query-functions";
+import { renderGame } from "./src/game-render-functions";
 
 const main = async () => {
   const pokemonUl = document.querySelector("#pokemon-list");
@@ -89,6 +90,21 @@ const main = async () => {
         });
       }
     }
+  });
+
+  // Implementation of minigame
+  const gameDialog = document.getElementById("game-dialog");
+  const openDialogButton = document.getElementById("minigame-button");
+  const closeDialogButton = document.getElementById("dialog-close-button");
+
+  openDialogButton.addEventListener("click", () => {
+    document.getElementById("game-content").innerHTML = "";
+    gameDialog.showModal();
+    renderGame();
+  });
+
+  closeDialogButton.addEventListener("click", () => {
+    gameDialog.close();
   });
 };
 

@@ -1,4 +1,4 @@
-import { getRandomPokemon } from "./fetch-functions";
+import { getRandomPokemon } from "./game-fetch-functions";
 
 let pokemon;
 const gameContainer = document.getElementById("game-content");
