@@ -10,11 +10,16 @@
   </head>
   <body>
     <main>
-      <dialog id="guess-pokemon-modal">
-        <h2>Hello</h2>
-        <div id="win-status"></div>
-        <ul id="options-list"></ul>
-        <button type="button" id="dialog-close-button">Open Dialog</button>
+      <dialog id="game-dialog">
+        <div id="game-wrapper">
+          <div id="game-header">
+            <h2>Who is that Pokemon ?</h2>
+            <button type="button" id="dialog-close-button">X</button>
+          </div>
+          <div id="results"></div>
+          <div id="game-content"></div>
+          <div id="game-footer"></div>
+        </div>
       </dialog>
       <div id="guess-pokemon-background"></div>
       <button type="button" id="dialog-open-button">Open Dialog</button>
