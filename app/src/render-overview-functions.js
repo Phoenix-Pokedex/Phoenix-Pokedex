@@ -41,7 +41,7 @@ const renderOverview = async (overviewDiv, object, pokemonId = 1) => {
   type.textContent = format(data.type);
 
   const typeImg = document.createElement("img");
-  typeImg.src = `/app/assets/types/${data.type}.png`;
+  typeImg.src = `app/assets/types/${data.type}.png`;
 
   const learnMore = document.createElement("img");
   learnMore.src = "assets/svg/icons/info.png";
