@@ -124,6 +124,7 @@ const main = async () => {
     form.reset();
   });
 
+  console.log(pokemonInformation);
   const handleSubmit = (event) => {
     searchMode = false;
     pokemonListElement.innerHTML = "";
@@ -132,6 +133,7 @@ const main = async () => {
     const dataObject = Object.fromEntries(data.entries());
     const pokemonTypeKey = dataObject["pokemon-type"];
     const filteredData = filterByType(pokemonData.pokemonList, pokemonTypeKey);
+    pokemonInformation = filteredData;
     renderPokemonList(pokemonListElement, filteredData);
     form.reset();
   };

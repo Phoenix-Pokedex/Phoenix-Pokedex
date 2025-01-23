@@ -4,11 +4,22 @@ import { format } from "./dom-helper-functions";
 
 const renderOverview = async (overviewDiv, object, pokemonId = 1) => {
   const data = {};
-  for (let pokemon of object.pokemonList) {
-    if (pokemon.id === pokemonId) {
-      data.name = pokemon.name;
-      data.img = pokemon.img;
-      data.type = pokemon.type;
+
+  if (object.pokemonList) {
+    for (let pokemon of object.pokemonList) {
+      if (pokemon.id === pokemonId) {
+        data.name = pokemon.name;
+        data.img = pokemon.img;
+        data.type = pokemon.type;
+      }
+    }
+  } else {
+    for (let pokemon of object) {
+      if (pokemon.id === pokemonId) {
+        data.name = pokemon.name;
+        data.img = pokemon.img;
+        data.type = pokemon.type;
+      }
     }
   }
 
