@@ -35,7 +35,7 @@
       <div id="tools-bar">
         <div id="form-container">
           <div id="search-container">
-            <label for="search-box">Explore</label>
+            <label id="explore-label" for="search-box">Explore</label>
             <input
               id="search-box"
               type="text"
@@ -44,7 +44,7 @@
             />
           </div>
           <form action="" id="pokemon-type-form" aria-labelledby="form-heading">
-            <label for="pokemon-types">Choose a type:</label>
+            <label id="type-label" for="pokemon-types">Choose a type:</label>
             <select name="pokemon-type" id="pokemon-types">
               <option value="" selected disabled hidden>
                 Select a Pokemon Type
@@ -68,7 +68,7 @@
               <option value="steel">Steel</option>
               <option value="water">Water</option>
             </select>
-            <button type="submit">Submit</button>
+            <button id="submit-type-button" type="submit">Submit</button>
             <button type="button" id="clear-form-button">Clear Filter</button>
           </form>
         </div>

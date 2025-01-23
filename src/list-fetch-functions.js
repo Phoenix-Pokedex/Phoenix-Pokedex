@@ -35,7 +35,7 @@ const getPokemon = async (pokemonData) => {
         type: data[i].types[0].type.name,
         img:
           data[i].sprites.other.home.front_default === null
-            ? "assets/svg/icons/image-break.png"
+            ? data[i].sprites.other["official-artwork"].front_default
             : data[i].sprites.other.home.front_default,
         id: data[i].id,
       });

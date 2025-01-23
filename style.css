@@ -15,6 +15,81 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: "Khand", serif;
+  font-size: 30px;
+}
+
+/* --- Pokemon Type From --- */
+#pokemon-type-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Khand", serif;
+  font-size: 30px;
+  margin: 5px;
+}
+#submit-type-button {
+  margin: 5px;
+}
+
+#explore-label {
+  border: solid;
+  border-color: #fcfc06;
+  border-radius: 25px;
+  width: 200px;
+  text-align: center;
+  background-color: #ddb81a;
+  margin: 7px;
+}
+
+#search-box {
+  border-color: #fcfc06;
+  border-radius: 25px;
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  font-family: "Khand", serif;
+}
+
+#type-label {
+  border: solid;
+  border-color: #fcfc06;
+  border-radius: 25px;
+  width: 200px;
+  text-align: center;
+  background-color: #ddb81a;
+  margin: 7px;
+}
+
+#pokemon-types {
+  border-color: #fcfc06;
+  border-radius: 25px;
+  width: 100%;
+  height: 30px;
+  text-align: center;
+  font-family: "Khand", serif;
+}
+#submit-type-button {
+  font-family: "Khand", serif;
+  border: solid;
+  border-color: #000000;
+  border-radius: 25px;
+  width: 100px;
+  height: 30px;
+  background-color: #4178cb;
+  color: white;
+  cursor: pointer;
+}
+#clear-form-button {
+  font-family: "Khand", serif;
+  border: solid;
+  border-color: #000000;
+  border-radius: 25px;
+  width: 100px;
+  height: 30px;
+  background-color: #4178cb;
+  color: white;
+  cursor: pointer;
 }
 
 /* --- Header Section --- */
@@ -76,6 +151,7 @@ html {
 
 /* Div container for form */
 #form-container {
+  align-items: center;
   display: flex;
   justify-content: center;
   gap: 10%;
@@ -354,6 +430,9 @@ html {
   }
   #pokemon-stats {
     overflow: auto;
+  }
+  #form-container {
+    flex-wrap: wrap;
   }
 }
 
