@@ -1,12 +1,7 @@
-export const fetchPokemon = async (pokemonId) => {
-  const format = (name) => {
-    const arr = name.split(" ");
-    for (let i = 0; i < arr.length; i += 1) {
-      arr[i] = arr[i][0].toUpperCase() + arr[i].substr(1);
-    }
-    return arr.join(" ");
-  };
+import imageBreak from "../assets/svg/icons/image-break.png";
+import { format } from "./dom-helper-functions";
 
+export const fetchPokemon = async (pokemonId) => {
   try {
     if (!pokemonId) {
       console.warn(`Provide a Pokemon name`);
@@ -30,7 +25,13 @@ export const fetchPokemon = async (pokemonId) => {
     // Structure the information
     const information = {
       name: format(data.name),
-      img: data.sprites.other.home.front_default,
+      img:
+        data.sprites.other.home.front_default === null &&
+        data.sprites.other["official-artwork"].front_default
+          ? data.sprites.other["official-artwork"].front_default
+          : data.sprites.other.home.front_default === null
+          ? imageBreak
+          : data.sprites.other.home.front_default,
       height: data.height,
       weight: data.weight,
       abilities: data.abilities.map((ability) => ability.ability.name),

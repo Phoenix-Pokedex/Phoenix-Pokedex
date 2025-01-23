@@ -4,7 +4,17 @@ const format = (name) => {
   for (let i = 0; i < arr.length; i += 1) {
     arr[i] = arr[i][0].toUpperCase() + arr[i].substr(1);
   }
-  return arr.join(" ");
+
+  const newArr = arr.join(" ");
+  const array2 = newArr.split("-");
+
+  if (newArr.includes("-")) {
+    for (let i = 0; i < array2.length; i += 1) {
+      array2[i] = array2[i][0].toUpperCase() + array2[i].substr(1);
+    }
+  }
+
+  return array2.join(" ");
 };
 
 const typeGallery = (pokemonType) => {
