@@ -7,6 +7,14 @@ const format = (name) => {
   return arr.join(" ");
 };
 
+const typeGallery = (pokemonType) => {
+  const imageUrl = new URL(
+    `../assets/types/${pokemonType}.png`,
+    import.meta.url
+  ).href;
+  return imageUrl;
+};
+
 const notFoundMessage = (listUl) => {
   const li = document.createElement("li");
   const message = document.createTextNode("Pokemon not found");
@@ -21,4 +29,4 @@ const longerMessageRequired = (listUl) => {
   listUl.append(li);
 };
 
-export { format, notFoundMessage, longerMessageRequired };
+export { typeGallery, format, notFoundMessage, longerMessageRequired };

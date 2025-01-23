@@ -1,4 +1,5 @@
 import { showSpinner, hideSpinner } from "./spinner-render-functions";
+import imageBreak from "../assets/svg/icons/image-break.png";
 
 const getData = async (url) => {
   try {
@@ -38,7 +39,7 @@ const getPokemon = async (pokemonData) => {
           data[i].sprites.other["official-artwork"].front_default
             ? data[i].sprites.other["official-artwork"].front_default
             : data[i].sprites.other.home.front_default === null
-            ? "Phoenix-Pokedex/app/assets/svg/icons/image-break.png"
+            ? imageBreak
             : data[i].sprites.other.home.front_default,
         id: data[i].id,
       });

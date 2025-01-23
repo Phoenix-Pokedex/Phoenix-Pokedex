@@ -1,8 +1,8 @@
 import { fetchPokemon } from "./modal-fetch-functions";
 import { renderOnePokemon, showPokemonDetails } from "./render-modal-functions";
-import { format } from "./dom-helper-functions";
+import { format, typeGallery } from "./dom-helper-functions";
+import questionSymbol from "../assets/svg/icons/info.png";
 
-//Renders overview section
 const renderOverview = async (overviewDiv, object, pokemonId = 1) => {
   const data = {};
 
@@ -42,10 +42,10 @@ const renderOverview = async (overviewDiv, object, pokemonId = 1) => {
   type.textContent = format(data.type);
 
   const typeImg = document.createElement("img");
-  typeImg.src = `Phoenix-Pokedex/app/assets/types/${data.type}.png`;
+  typeImg.src = typeGallery(data.type);
 
   const learnMore = document.createElement("img");
-  learnMore.src = "assets/svg/icons/info.png";
+  learnMore.src = questionSymbol;
   learnMore.id = "learn-more-button";
   learnMore.setAttribute("pokemon-id", pokemonId);
 
