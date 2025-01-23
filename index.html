@@ -5,7 +5,147 @@
     <link rel="icon" type="image/svg+xml" href="./icon.svg" />
     <link rel="stylesheet" href="./style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="./main.js"></script>
     <title>Pokedex</title>
+    <!-- Font -->
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Funnel+Display:wght@300..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Khand:wght@300;400;500;600;700&family=Lexend+Deca:wght@100..900&family=Lexend:wght@100..900&family=M+PLUS+1p:wght@900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Saira:ital,wdth,wght@0,78.5,100..900;1,78.5,100..900&family=Smooch+Sans:wght@100..900&display=swap");
+    </style>
   </head>
-  <body></body>
+  <body>
+    <main>
+      <div id="header">
+        <div id="title-container">
+          <img
+            src="/assets/svg/icons/pokeball-header.svg"
+            alt="image of pokeball"
+            width="60px"
+          />
+          <h1>Pokedex</h1>
+          <img
+            src="/assets/svg/icons/pokeball-header.svg"
+            alt="image of pokeball"
+            width="60px"
+          />
+        </div>
+        <div id="minigame-button">
+          <p>Guess the Pokemon</p>
+        </div>
+      </div>
+      <div id="tools-bar">
+        <div id="form-container">
+          <div id="search-container">
+            <label id="explore-label" for="search-box">Explore</label>
+            <input
+              id="search-box"
+              type="text"
+              placeholder="Search for a pokemon..."
+              name="search-input"
+            />
+          </div>
+          <form action="" id="pokemon-type-form" aria-labelledby="form-heading">
+            <label id="type-label" for="pokemon-types">Choose a type:</label>
+            <select name="pokemon-type" id="pokemon-types">
+              <option value="" selected disabled hidden>
+                Select a Pokemon Type
+              </option>
+              <option value="bug">Bug</option>
+              <option value="dark">Dark</option>
+              <option value="dragon">Dragon</option>
+              <option value="electric">Electric</option>
+              <option value="fairy">Fairy</option>
+              <option value="fighting">Fighting</option>
+              <option value="fire">Fire</option>
+              <option value="flying">Flying</option>
+              <option value="ghost">Ghost</option>
+              <option value="grass">Grass</option>
+              <option value="ground">Ground</option>
+              <option value="ice">Ice</option>
+              <option value="normal">Normal</option>
+              <option value="poison">Poison</option>
+              <option value="psychic">Psychic</option>
+              <option value="rock">Rock</option>
+              <option value="steel">Steel</option>
+              <option value="water">Water</option>
+            </select>
+            <button id="submit-type-button" type="submit">Submit</button>
+            <button type="button" id="clear-form-button">Clear Filter</button>
+          </form>
+        </div>
+      </div>
+
+      <div id="content-wrapper">
+        <section aria-label="overview" id="overview-wrapper">
+          <!-- <h2>Overview</h2> -->
+        </section>
+        <section aria-label="pokemons" id="pokemons">
+          <h2>Pokemon</h2>
+          <ul id="pokemon-list"></ul>
+          <div id="loading-overlay">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+              <radialGradient
+                id="a11"
+                cx=".66"
+                fx=".66"
+                cy=".3125"
+                fy=".3125"
+                gradientTransform="scale(1.5)"
+              >
+                <stop offset="0" stop-color="#FFFFFF"></stop>
+                <stop offset=".3" stop-color="#FFFFFF" stop-opacity=".9"></stop>
+                <stop offset=".6" stop-color="#FFFFFF" stop-opacity=".6"></stop>
+                <stop offset=".8" stop-color="#FFFFFF" stop-opacity=".3"></stop>
+                <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"></stop>
+              </radialGradient>
+              <circle
+                transform-origin="center"
+                fill="none"
+                stroke="url(#a11)"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-dasharray="200 1000"
+                stroke-dashoffset="0"
+                cx="100"
+                cy="100"
+                r="70"
+              >
+                <animateTransform
+                  type="rotate"
+                  attributeName="transform"
+                  calcMode="spline"
+                  dur="2"
+                  values="360;0"
+                  keyTimes="0;1"
+                  keySplines="0 0 1 1"
+                  repeatCount="indefinite"
+                ></animateTransform>
+              </circle>
+              <circle
+                transform-origin="center"
+                fill="none"
+                opacity=".2"
+                stroke="#FFFFFF"
+                stroke-width="3"
+                stroke-linecap="round"
+                cx="100"
+                cy="100"
+                r="70"
+              ></circle>
+            </svg>
+          </div>
+        </section>
+      </div>
+      <dialog id="game-dialog">
+        <div id="game-wrapper">
+          <div id="game-header">
+            <h2>Who is that Pokemon ?</h2>
+            <button type="button" id="dialog-close-button">X</button>
+          </div>
+          <div id="results"></div>
+          <div id="game-content"></div>
+          <div id="game-footer"></div>
+        </div>
+      </dialog>
+    </main>
+  </body>
 </html>

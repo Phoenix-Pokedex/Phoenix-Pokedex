@@ -1,5 +1,3 @@
-import { showSpinner, hideSpinner } from "./spinner-render-functions";
-
 const getData = async (url) => {
   try {
     const response = await fetch(url);
@@ -16,7 +14,6 @@ const getData = async (url) => {
 };
 
 const getPokemon = async (pokemonData) => {
-  showSpinner();
   const information = {
     nextPage: pokemonData.next,
     previousPage: pokemonData.previous,
@@ -35,26 +32,20 @@ const getPokemon = async (pokemonData) => {
         type: data[i].types[0].type.name,
         img:
           data[i].sprites.other.home.front_default === null
-            ? data[i].sprites.other["official-artwork"].front_default
+            ? "assets/svg/icons/image-break.png"
             : data[i].sprites.other.home.front_default,
         id: data[i].id,
       });
     }
-    hideSpinner();
     return information;
   });
 };
 
-const getTwentyPokemon = async (
-  endpoint = "https://pokeapi.co/api/v2/pokemon"
-) => {
-  showSpinner();
-  return getData(endpoint).then(async (pokemonData) => {
-    return getPokemon(pokemonData).then((data) => {
-      hideSpinner();
-      return data;
-    });
+const filterByType = (pokemonData, type) => {
+  const filteredArray = pokemonData.filter((pokemon) => {
+    return pokemon.type === type;
   });
+  return filteredArray;
 };
 
-export { getTwentyPokemon, getPokemon, getData };
+export { getData, getPokemon, filterByType };
