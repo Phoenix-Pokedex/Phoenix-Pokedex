@@ -31,9 +31,11 @@ const getPokemon = async (pokemonData) => {
 
   return Promise.all(promises).then((data) => {
     for (let i = 0; i < data.length; i += 1) {
+      console.log(data[i]);
       information.pokemonList.push({
         name: data[i].name,
-        type: data[i].types[0].type.name,
+        type:
+          data[i].types.length === 0 ? "Not Found" : data[i].types[0].type.name,
         img:
           data[i].sprites.other.home.front_default === null &&
           data[i].sprites.other["official-artwork"].front_default
